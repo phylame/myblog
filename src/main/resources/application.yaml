@@ -1,0 +1,28 @@
+server:
+  undertow:
+    worker-threads: 16
+    direct-buffers: true
+    buffer-size: 1024
+spring:
+  datasource:
+    url: ${jdbc.url}
+    username: ${jdbc.username}
+    password: ${jdbc.password}
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+---
+spring:
+  profiles: dev
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  thymeleaf:
+    cache: false
+---
+spring:
+  profiles: prod
+  jpa:
+    hibernate:
+      ddl-auto: validate

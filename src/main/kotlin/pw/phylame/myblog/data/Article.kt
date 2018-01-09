@@ -10,37 +10,31 @@ import javax.validation.constraints.NotNull
 
 @Entity
 data class Article(
-        @Id
-        @GeneratedValue
+        @get:[Id GeneratedValue]
         var id: Int = 0,
 
-        @get:NotEmpty
-        @Column(unique = true, length = 256)
+        @get:[NotEmpty Column(unique = true, length = 256)]
         var title: String = "",
 
-        @get:NotNull
-        @ManyToOne
-        @JoinColumn(name = "category_id")
+        @get:[NotNull ManyToOne JoinColumn(name = "category_id")]
         var category: Category = Category(),
 
-        @NotNull
+        @get:NotNull
         var creation: LocalDateTime = LocalDateTime.now(),
 
-        @get:NotEmpty
-        @ManyToMany
+        @get:[NotEmpty ManyToMany]
         var tags: List<Tag> = emptyList(),
 
-        @get:NotEmpty
-        @Column(length = 512)
+        @get:[NotEmpty Column(length = 512)]
         var contentUrl: String = "",
 
-        @OneToMany(mappedBy = "article")
+        @get:OneToMany(mappedBy = "article")
         var comments: List<Comment> = emptyList(),
 
-        @ColumnDefault("0")
+        @get:ColumnDefault("0")
         var readCount: Int = 0,
 
-        @ColumnDefault("0")
+        @get:ColumnDefault("0")
         var starCount: Int = 0
 ) : Serializable
 

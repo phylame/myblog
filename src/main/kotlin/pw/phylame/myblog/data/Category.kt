@@ -11,17 +11,15 @@ import javax.persistence.Id
 import javax.validation.constraints.NotNull
 
 @Entity
-data class Tag(
-        @Id
-        @GeneratedValue
+data class Category(
+        @get:[Id GeneratedValue]
         var id: Int = 0,
 
-        @get:NotEmpty
-        @Column(unique = true, length = 32)
+        @get:[NotEmpty Column(unique = true, length = 32)]
         var name: String = "",
 
         @get:NotNull
         var creation: LocalDateTime = LocalDateTime.now()
 ) : Serializable
 
-interface TagRepository : PagingAndSortingRepository<Tag, Int>
+interface CategoryRepository : PagingAndSortingRepository<Category, Int>

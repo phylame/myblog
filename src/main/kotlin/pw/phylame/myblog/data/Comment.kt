@@ -9,26 +9,22 @@ import javax.validation.constraints.NotNull
 
 @Entity
 data class Comment(
-        @Id
-        @GeneratedValue
+        @get:[Id GeneratedValue]
         var id: Int = 0,
 
-        @Column(length = 128)
+        @get:Column(length = 128)
         var name: String = "",
 
-        @Column(length = 64)
+        @get:Column(length = 64)
         var email: String = "",
 
         @get:NotNull
         var creation: LocalDateTime = LocalDateTime.now(),
 
-        @get:NotNull
-        @ManyToOne
-        @JoinColumn(name = "article_id")
+        @get:[NotNull ManyToOne JoinColumn(name = "article_id")]
         var article: Article = Article(),
 
-        @get:NotEmpty
-        @Column(length = 1024)
+        @get:[NotEmpty Column(length = 1024)]
         var content: String = ""
 ) : Serializable
 

@@ -12,12 +12,10 @@ import javax.validation.constraints.NotNull
 
 @Entity
 data class Tag(
-        @Id
-        @GeneratedValue
+        @get:[Id GeneratedValue]
         var id: Int = 0,
 
-        @get:NotEmpty
-        @Column(unique = true, length = 32)
+        @get:[NotEmpty Column(unique = true, length = 32)]
         var name: String = "",
 
         @get:NotNull

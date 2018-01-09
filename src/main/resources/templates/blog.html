@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="../static/css/main.css" th:href="@{/css/main.css}"/>
+  <title>Recent Articles</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#" th:href="@{/}">WPArts</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" th:href="@{/about}">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" th:href="@{/app}">Apps</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" th:href="@{/post}">Articles</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <div class="row">
+    <main class="col-lg-8">
+      <h1 class="mt-4">Recent Articles</h1>
+      <ul class="list-unstyled">
+        <li th:each="post: ${posts}" th:object="${post}">
+          <div class="card" style="border-style: none">
+            <div class="card-body">
+              <h5 class="card-title">
+                <a href="view.html" th:href="@{/post/{postId}(postId=*{id})}" th:text="*{title}">Article title</a>
+              </h5>
+              <p class="card-text">This is a wider card with supporting text below as a natural
+                lead-in to
+                additional content. This content is a little bit longer.</p>
+              <p class="card-text">
+                <small class="text-muted badge badge-light">
+                  <a href="category.html" th:href="@{/post/category/{categoryId}(categoryId=*{category.id})}"
+                     th:text="*{category.name}">Category</a>
+                </small>
+                &nbsp;
+                <small class="text-muted" th:text="*{creation}">Last updated 3 mins ago</small>
+                &nbsp;
+                <small class="text-muted">
+                  <i class="fa fa-book" aria-hidden="true"></i>
+                  <span th:text="*{readCount}">N/A</span>
+                </small>
+                &nbsp;
+                <small class="text-muted">
+                  <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                  <span th:text="*{starCount}">N/A</span>
+                </small>
+              </p>
+              <hr/>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </main>
+    <aside class="col-md-4">
+      <div class="card my-4">
+        <h5 class="card-header">Popular</h5>
+        <div class="list-group list-group-flush">
+          <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+          <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
+          <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
+          <a href="#" class="list-group-item list-group-item-action">Vestibulum at eros</a>
+        </div>
+        <div class="card-body">
+          <a href="#" class="card-link">Find More...</a>
+        </div>
+      </div>
+      <div class="card my-4">
+        <h5 class="card-header">Categories</h5>
+        <div class="list-group list-group-flush">
+          <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+          <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
+          <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
+          <a href="#" class="list-group-item list-group-item-action">Vestibulum at eros</a>
+        </div>
+        <div class="card-body">
+          <a href="#" class="card-link">Find More...</a>
+        </div>
+      </div>
+      <div class="card my-4">
+        <h5 class="card-header">Archives</h5>
+        <div class="list-group list-group-flush">
+          <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+          <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
+          <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
+          <a href="#" class="list-group-item list-group-item-action">Vestibulum at eros</a>
+        </div>
+        <div class="card-body">
+          <a href="#" class="card-link">Find More...</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+<footer class="py-3 bg-dark">
+  <div class="container">
+    <p class="m-0 text-left text-white">Copyright &copy; WPArts 2017</p>
+  </div>
+</footer>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0-beta.3/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+</body>
+</html>

@@ -1,99 +1,159 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="zh">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no"/>
   <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
   <link rel="stylesheet" href="../../static/css/main.css" th:href="@{/css/main.css}"/>
   <link rel="stylesheet" href="../../static/css/post.css" th:href="@{/css/post.css}"/>
-  <title>Recent Articles</title>
+  <title>Post List</title>
 </head>
 <body>
-<nav th:replace="header::nav"></nav>
-<div class="container">
-  <div class="row">
-    <main class="col-lg-8">
-      <h1 class="mt-4">Recent Articles</h1>
-      <ul class="list-unstyled">
-        <li th:each="post: ${posts}" th:object="${post}">
-          <div class="card post-item">
-            <div class="card-body">
-              <h5 class="card-title">
-                <a href="view.html" th:href="@{/post/{postId}(postId=*{id})}" th:text="*{title}" th:title="*{title}">Article
-                  title</a>
-              </h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural
-                lead-in to
-                additional content. This content is a little bit longer.</p>
-              <p class="card-text">
-                <small class="text-muted badge badge-light post-item-category">
-                  <a href="category.html" title="Go to category"
-                     th:href="@{/post/category/{categoryId}(categoryId=*{category.id})}"
-                     th:text="*{category.name}">Category</a>
-                </small>
-                &nbsp;
-                <small class="text-muted" th:text="*{creation}">Last updated 3 mins ago</small>
-                &nbsp;
-                <small class="text-muted">
-                  <i class="fa fa-book" aria-hidden="true"></i>
-                  <span th:text="*{readCount}">N/A</span>
-                </small>
-                &nbsp;
-                <small class="text-muted">
-                  <i class="fa fa-commenting-o" aria-hidden="true"></i>
-                  <span th:text="*{starCount}">N/A</span>
-                </small>
-              </p>
-              <hr/>
+<div id="wrap">
+  <header>
+    <nav class="navbar navbar-expand-md navbar-light fixed-top py-0">
+      <div class="container">
+        <a class="navbar-brand" href="#" th:href="@{/}">WPArts</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
+                aria-controls="navbarContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fa fa-bars" aria-hidden="true"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#" th:href="@{/}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" th:href="@{/app}">Apps</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="#" th:href="@{/post}">
+                Articles
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" th:href="@{/about}">About</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <h1>Recent Articles</h1>
+    </div>
+  </header>
+  <main role="main" class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <ul class="list-unstyled">
+          <li class="border-bottom" th:each="post: ${posts}">
+            <div class="card post-item" th:object="${post}">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <a href="post.html" th:href="@{/post/{postId}(postId=*{id})}" title="This is Post Title"
+                     th:title="*{title}" th:text="*{title}">This is Post Title</a>
+                </h5>
+                <p class="card-text">This is breif introduction of the post. Vivamus
+                  sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo
+                  luctus.</p>
+                <p class="card-text">
+                  <small class="text-muted badge badge-light post-item-category">
+                    <a href="list.html" th:href="@{/post(category=*{category.id})}"
+                       title="View articles for misc" th:title="|List posts for *{category.name}|"
+                       th:text="*{category.name}">misc</a>
+                  </small>
+                  &nbsp; &nbsp;
+                  <small class="text-muted" title="Post Date">
+                    <i class="fa fa-calendar-o" aria-hidden="true"></i>
+                    <span th:text="*{creation.toLocalDate()}">2018-01-10</span>
+                  </small>
+                  &nbsp; &nbsp;
+                  <small class="text-muted" title="Viewed Number">
+                    <i class="fa fa-book" aria-hidden="true"></i>
+                    <span th:text="*{readCount}">0</span>
+                  </small>
+                  &nbsp; &nbsp;
+                  <small class="text-muted" title="Comments Number">
+                    <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                    <span th:text="*{starCount}">0</span>
+                  </small>
+                </p>
+              </div>
             </div>
+          </li>
+        </ul>
+      </div>
+      <aside class="col-md-4">
+        <div class="card my-4">
+          <h5 class="card-header">Categories</h5>
+          <div class="list-group list-group-flush">
+            <a href="/post/category/1"
+               class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+              <span>c</span>
+              <span class="badge badge-primary badge-pill">14</span>
+            </a>
+            <a href="/post/category/2"
+               class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+              <span>java</span>
+              <span class="badge badge-primary badge-pill">14</span>
+            </a>
+            <a href="/post/category/3"
+               class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+              <span>linux</span>
+              <span class="badge badge-primary badge-pill">14</span>
+            </a>
+            <a href="/post/category/4"
+               class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+              <span>windows</span>
+              <span class="badge badge-primary badge-pill">14</span>
+            </a>
           </div>
-        </li>
-      </ul>
-    </main>
-    <aside class="col-md-4">
-      <div class="card my-4">
-        <h5 class="card-header">Popular</h5>
-        <div class="list-group list-group-flush">
-          <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
-          <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
-          <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
-          <a href="#" class="list-group-item list-group-item-action">Vestibulum at eros</a>
         </div>
-        <div class="card-body">
-          <a href="#" class="card-link">Find More...</a>
+        <div class="card my-4">
+          <h5 class="card-header">Archives</h5>
+          <div class="list-group list-group-flush">
+            <a href="/post/category/1"
+               class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+              <span>c</span>
+              <span class="badge badge-primary badge-pill">14</span>
+            </a>
+            <a href="/post/category/2"
+               class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+              <span>java</span>
+              <span class="badge badge-primary badge-pill">14</span>
+            </a>
+            <a href="/post/category/3"
+               class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+              <span>linux</span>
+              <span class="badge badge-primary badge-pill">14</span>
+            </a>
+            <a href="/post/category/4"
+               class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+              <span>windows</span>
+              <span class="badge badge-primary badge-pill">14</span>
+            </a>
+          </div>
         </div>
-      </div>
-      <div class="card my-4">
-        <h5 class="card-header">Categories</h5>
-        <div class="list-group list-group-flush">
-          <a href="#" class="list-group-item d-flex justify-content-between align-items-center"
-             th:each="category: ${categories}"
-             th:object="${category}" th:href="@{/post/category/{categoryId}(categoryId=*{id})}">
-            <span th:text="*{name}">Category</span>
-            <span class="badge badge-primary badge-pill">14</span>
-          </a>
-        </div>
-        <div class="card-body">
-          <a href="#" class="card-link">Find More...</a>
-        </div>
-      </div>
-      <div class="card my-4">
-        <h5 class="card-header">Archives</h5>
-        <div class="list-group list-group-flush">
-          <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
-          <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
-          <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
-          <a href="#" class="list-group-item list-group-item-action">Vestibulum at eros</a>
-        </div>
-        <div class="card-body">
-          <a href="#" class="card-link">Find More...</a>
-        </div>
-      </div>
-    </aside>
-  </div>
+      </aside>
+    </div>
+  </main>
 </div>
-<footer th:replace="footer::footer"></footer>
+<footer id="footer" class="py-3 w-100 bg-light fixed-bottom">
+  <div class="container">
+    <p class="py-0 my-0 text-left small">
+      <span>&copy; WPArts 2018</span>
+      &nbsp;
+      <i class="fa fa-envelope-o" aria-hidden="true"></i>
+      <a href="mailto:phylame@163.com">Contact</a>
+      &nbsp;
+      <i class="fa fa-github" aria-hidden="true"></i>
+      <a href="https://github.com/phylame">GitHub</a>
+    </p>
+  </div>
+</footer>
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/4.0.0-beta.3/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>

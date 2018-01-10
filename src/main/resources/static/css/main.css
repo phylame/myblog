@@ -1,9 +1,47 @@
-body {
-    padding-top: 54px;
+html, body {
+    margin: 0;
+    height: 100%;
 }
 
-@media (min-width: 992px) {
-    body {
-        padding-top: 56px;
-    }
+body {
+    padding-top: 3rem;
+}
+
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+}
+
+header > .navbar {
+    background: linear-gradient(to bottom, #ffffff, #f2f2f2) repeat-x;
+    border-bottom: 1px solid #d4d4d4;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+}
+
+main {
+    padding-bottom: 48px;
+}
+
+#footer {
+    position: relative;
+    margin-top: -48px;
+    height: 48px;
+    clear: both;
+    color: #999;
+    background-color: #f9f9f9;
+}
+
+.no-rounded-left {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.no-rounded-right {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.border-bottom {
+    border-bottom: 1px #e1e4e8 solid !important;
 }

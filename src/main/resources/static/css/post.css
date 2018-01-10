@@ -2,13 +2,8 @@
     border-style: none;
 }
 
-.post-item .card-body {
-    padding-top: 0.5em;
-    padding-bottom: 0;
-}
-
 .post-item-category {
-    min-width: 3em;
+    min-width: 3rem;
 }
 
 .post-item hr {

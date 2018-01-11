@@ -1,6 +1,8 @@
 package pw.phylame.myblog.data
 
 import org.hibernate.validator.constraints.NotEmpty
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.data.repository.PagingAndSortingRepository
 import java.io.Serializable
 import java.time.LocalDateTime
@@ -28,4 +30,6 @@ data class Comment(
         var content: String = ""
 ) : Serializable
 
-interface CommentRepository : PagingAndSortingRepository<Comment, Int>
+interface CommentRepository : PagingAndSortingRepository<Comment, Int> {
+    fun findAllByArticleId(articleId: Int, pageable: Pageable?): Page<Comment>
+}

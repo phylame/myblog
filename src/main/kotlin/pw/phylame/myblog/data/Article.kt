@@ -18,6 +18,9 @@ data class Article(
         @get:[NotEmpty Column(unique = true, length = 256)]
         var title: String = "",
 
+//        @get:[NotEmpty Column(length = 1024)]
+//        var intro: String = "",
+
         @get:[NotNull ManyToOne JoinColumn(name = "category_id")]
         var category: Category = Category(),
 
@@ -42,4 +45,6 @@ data class Article(
 
 interface ArticleRepository : PagingAndSortingRepository<Article, Int> {
     fun findAllByCategoryId(categoryId: Int, pageable: Pageable?): Page<Article>
+
+    fun findAllByTagsId(tagId: Int, pageable: Pageable?): Page<Article>
 }

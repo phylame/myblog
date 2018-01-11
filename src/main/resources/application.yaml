@@ -14,9 +14,8 @@ spring:
   data:
     rest:
       base-path: api
-  mvc:
-    favicon:
-      enabled: false
+  messages:
+    basename: i18n/messages
 ---
 spring:
   profiles: init

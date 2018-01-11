@@ -1,11 +1,8 @@
-.post-item {
-    border-style: none;
-}
-
-.post-item-category {
+.post-mark-item {
     min-width: 3rem;
 }
 
-.post-item hr {
-    margin-top: 0;
+.post-tag-list li {
+    padding-left: 0;
+    padding-right: 0;
 }

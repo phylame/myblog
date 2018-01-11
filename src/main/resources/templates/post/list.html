@@ -1,161 +1,312 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh">
+
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no"/>
-  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"/>
-  <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-  <link rel="stylesheet" href="../../static/css/main.css" th:href="@{/css/main.css}"/>
-  <link rel="stylesheet" href="../../static/css/post.css" th:href="@{/css/post.css}"/>
-  <title>Post List</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../../static/css/main.css" />
+    <link rel="stylesheet" href="../../static/css/post.css" />
+    <link rel="icon" href="../../static/favicon.ico" />
+    <title>Recent Posts</title>
 </head>
+
 <body>
-<div id="wrap">
-  <header>
-    <nav class="navbar navbar-expand-md navbar-light fixed-top py-0">
-      <div class="container">
-        <a class="navbar-brand" href="#" th:href="@{/}">WPArts</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
-                aria-controls="navbarContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-          <i class="fa fa-bars" aria-hidden="true"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarContent">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="#" th:href="@{/}">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" th:href="@{/app}">Apps</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="#" th:href="@{/post}">
-                Articles
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" th:href="@{/about}">About</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <div class="container">
-      <h1>Recent Articles</h1>
-    </div>
-  </header>
-  <main role="main" class="container">
-    <div class="row">
-      <div class="col-md-8">
-        <ul class="list-unstyled">
-          <li class="border-bottom" th:each="post: ${posts}">
-            <div class="card post-item" th:object="${post}">
-              <div class="card-body">
-                <h5 class="card-title">
-                  <a href="post.html" th:href="@{/post/{postId}(postId=*{id})}" title="This is Post Title"
-                     th:title="*{title}" th:text="*{title}">This is Post Title</a>
-                </h5>
-                <p class="card-text">This is breif introduction of the post. Vivamus
-                  sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo
-                  luctus.</p>
-                <p class="card-text">
-                  <small class="text-muted badge badge-light post-item-category">
-                    <a href="list.html" th:href="@{/post(category=*{category.id})}"
-                       title="View articles for misc" th:title="|List posts for *{category.name}|"
-                       th:text="*{category.name}">misc</a>
-                  </small>
-                  &nbsp; &nbsp;
-                  <small class="text-muted" title="Post Date">
-                    <i class="fa fa-calendar-o" aria-hidden="true"></i>
-                    <span th:text="*{creation.toLocalDate()}">2018-01-10</span>
-                  </small>
-                  &nbsp; &nbsp;
-                  <small class="text-muted" title="Viewed Number">
-                    <i class="fa fa-book" aria-hidden="true"></i>
-                    <span th:text="*{readCount}">0</span>
-                  </small>
-                  &nbsp; &nbsp;
-                  <small class="text-muted" title="Comments Number">
-                    <i class="fa fa-commenting-o" aria-hidden="true"></i>
-                    <span th:text="*{starCount}">0</span>
-                  </small>
-                </p>
-              </div>
+    <div id="wrapper">
+        <header id="header">
+            <nav class="navbar navbar-expand-md navbar-light fixed-top py-0">
+                <div class="container">
+                    <a class="navbar-brand" href="../index.html">WPArts</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fa fa-bars" aria-hidden="true"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarContent">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="../index.html">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../app.html">Apps</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Articles
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../about.html">About</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main role="main" class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <ul class="list-unstyled">
+                        <li class="border-bottom">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="view.html" title="This is post title">This is post title</a>
+                                </h5>
+                                <p class="card-text" title="Post intro">Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non
+                                    commodo luctus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere
+                                    erat a ante.orem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat
+                                    a ante.</p>
+                                <ul class="list-inline small text-muted">
+                                    <li class="list-inline-item badge badge-light post-mark-item" title="Post category">
+                                        <a href="list.html">misc</a>
+                                    </li>
+                                    <li class="list-inline-item" title="Post date">
+                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                        <span>2018-01-10</span>
+                                    </li>
+                                    <li class="list-inline-item" title="Viewed number">
+                                        <i class="fa fa-book" aria-hidden="true"></i>
+                                        <span>10</span>
+                                    </li>
+                                    <li class="list-inline-item" title="Comments number">
+                                        <i class="fa fa-commenting" aria-hidden="true"></i>
+                                        <span>7</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="border-bottom">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="view.html" title="This is post title">This is post title</a>
+                                </h5>
+                                <p class="card-text" title="Post intro">Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non
+                                    commodo luctus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere
+                                    erat a ante.orem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat
+                                    a ante.</p>
+                                <ul class="list-inline small text-muted">
+                                    <li class="list-inline-item badge badge-light post-mark-item" title="Post category">
+                                        <a href="list.html">misc</a>
+                                    </li>
+                                    <li class="list-inline-item" title="Post date">
+                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                        <span>2018-01-10</span>
+                                    </li>
+                                    <li class="list-inline-item" title="Viewed number">
+                                        <i class="fa fa-book" aria-hidden="true"></i>
+                                        <span>10</span>
+                                    </li>
+                                    <li class="list-inline-item" title="Comments number">
+                                        <i class="fa fa-commenting" aria-hidden="true"></i>
+                                        <span>7</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="border-bottom">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="view.html" title="This is post title">This is post title</a>
+                                </h5>
+                                <p class="card-text" title="Post intro">Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non
+                                    commodo luctus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere
+                                    erat a ante. </p>
+                                <ul class="list-inline small text-muted">
+                                    <li class="list-inline-item badge badge-light post-mark-item" title="Post category">
+                                        <a href="list.html">misc</a>
+                                    </li>
+                                    <li class="list-inline-item" title="Post date">
+                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                        <span>2018-01-10</span>
+                                    </li>
+                                    <li class="list-inline-item" title="Viewed number">
+                                        <i class="fa fa-book" aria-hidden="true"></i>
+                                        <span>10</span>
+                                    </li>
+                                    <li class="list-inline-item" title="Comments number">
+                                        <i class="fa fa-commenting" aria-hidden="true"></i>
+                                        <span>7</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="border-bottom">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="view.html" title="This is post title">This is post title</a>
+                                </h5>
+                                <p class="card-text" title="Post intro">Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non
+                                    commodo luctus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere
+                                    erat a ante. </p>
+                                <ul class="list-inline small text-muted">
+                                    <li class="list-inline-item badge badge-light post-mark-item" title="Post category">
+                                        <a href="list.html">misc</a>
+                                    </li>
+                                    <li class="list-inline-item" title="Post date">
+                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                        <span>2018-01-10</span>
+                                    </li>
+                                    <li class="list-inline-item" title="Viewed number">
+                                        <i class="fa fa-book" aria-hidden="true"></i>
+                                        <span>10</span>
+                                    </li>
+                                    <li class="list-inline-item" title="Comments number">
+                                        <i class="fa fa-commenting" aria-hidden="true"></i>
+                                        <span>7</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="border-bottom">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="view.html" title="This is post title">This is post title</a>
+                                </h5>
+                                <p class="card-text" title="Post intro">Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non
+                                    commodo luctus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere
+                                    erat a ante. </p>
+                                <ul class="list-inline small text-muted">
+                                    <li class="list-inline-item badge badge-light post-mark-item" title="Post category">
+                                        <a href="list.html">misc</a>
+                                    </li>
+                                    <li class="list-inline-item" title="Post date">
+                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                        <span>2018-01-10</span>
+                                    </li>
+                                    <li class="list-inline-item" title="Viewed number">
+                                        <i class="fa fa-book" aria-hidden="true"></i>
+                                        <span>10</span>
+                                    </li>
+                                    <li class="list-inline-item" title="Comments number">
+                                        <i class="fa fa-commenting" aria-hidden="true"></i>
+                                        <span>7</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">Previous</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="list.html">1</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="list.html">2</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="list.html">3</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="list.html">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <aside class="col-md-3">
+                    <form class="pt-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search for posts">
+                            <span class="input-group-btn">
+                                <button class="btn btn-secondary no-rounded-left" type="button">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                    <div class="card my-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Categories</h5>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a class="clearfix" href="list.html">
+                                        <span class="float-left">Java</span>
+                                        <span class="badge badge-primary badge-pill float-right">6</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="clearfix" href="list.html">
+                                        <span class="float-left">Nginx</span>
+                                        <span class="badge badge-primary badge-pill float-right">16</span>
+                                    </a>
+                                </li>
+                                <div class="collapse" id="hiddenCategories">
+                                    <li>
+                                        <a class="clearfix" href="list.html">
+                                            <span class="float-left">Linux</span>
+                                            <span class="badge badge-primary badge-pill float-right">2</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="clearfix" href="list.html">
+                                            <span class="float-left">Misc</span>
+                                            <span class="badge badge-primary badge-pill float-right">4</span>
+                                        </a>
+                                    </li>
+                                </div>
+                            </ul>
+                            <a data-toggle="collapse" href="#hiddenCategories" role="button" aria-expanded="false" aria-controls="hiddenCategories">
+                                More...
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card my-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Archives</h5>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a class="clearfix" href="list.html">
+                                        <span class="float-left">Jan, 2018</span>
+                                        <span class="badge badge-primary badge-pill float-right">6</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="clearfix" href="list.html">
+                                        <span class="float-left">Aug, 2017</span>
+                                        <span class="badge badge-primary badge-pill float-right">16</span>
+                                    </a>
+                                </li>
+                                <div class="collapse" id="hiddenArchives">
+                                    <li>
+                                        <a class="clearfix" href="list.html">
+                                            <span class="float-left">May, 2017</span>
+                                            <span class="badge badge-primary badge-pill float-right">2</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="clearfix" href="list.html">
+                                            <span class="float-left">Apr, 2017</span>
+                                            <span class="badge badge-primary badge-pill float-right">4</span>
+                                        </a>
+                                    </li>
+                                </div>
+                            </ul>
+                            <a data-toggle="collapse" href="#hiddenArchives" role="button" aria-expanded="false" aria-controls="hiddenArchives">
+                                More...
+                            </a>
+                        </div>
+                    </div>
+                </aside>
             </div>
-          </li>
-        </ul>
-      </div>
-      <aside class="col-md-4">
-        <div class="card my-4">
-          <h5 class="card-header">Categories</h5>
-          <div class="list-group list-group-flush">
-            <a href="/post/category/1"
-               class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-              <span>c</span>
-              <span class="badge badge-primary badge-pill">14</span>
-            </a>
-            <a href="/post/category/2"
-               class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-              <span>java</span>
-              <span class="badge badge-primary badge-pill">14</span>
-            </a>
-            <a href="/post/category/3"
-               class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-              <span>linux</span>
-              <span class="badge badge-primary badge-pill">14</span>
-            </a>
-            <a href="/post/category/4"
-               class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-              <span>windows</span>
-              <span class="badge badge-primary badge-pill">14</span>
-            </a>
-          </div>
-        </div>
-        <div class="card my-4">
-          <h5 class="card-header">Archives</h5>
-          <div class="list-group list-group-flush">
-            <a href="/post/category/1"
-               class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-              <span>c</span>
-              <span class="badge badge-primary badge-pill">14</span>
-            </a>
-            <a href="/post/category/2"
-               class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-              <span>java</span>
-              <span class="badge badge-primary badge-pill">14</span>
-            </a>
-            <a href="/post/category/3"
-               class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-              <span>linux</span>
-              <span class="badge badge-primary badge-pill">14</span>
-            </a>
-            <a href="/post/category/4"
-               class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-              <span>windows</span>
-              <span class="badge badge-primary badge-pill">14</span>
-            </a>
-          </div>
-        </div>
-      </aside>
+        </main>
     </div>
-  </main>
-</div>
-<footer id="footer" class="py-3 w-100 bg-light fixed-bottom">
-  <div class="container">
-    <p class="py-0 my-0 text-left small">
-      <span>&copy; WPArts 2018</span>
-      &nbsp;
-      <i class="fa fa-envelope-o" aria-hidden="true"></i>
-      <a href="mailto:phylame@163.com">Contact</a>
-      &nbsp;
-      <i class="fa fa-github" aria-hidden="true"></i>
-      <a href="https://github.com/phylame">GitHub</a>
-    </p>
-  </div>
-</footer>
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js"></script>
-<script src="https://cdn.bootcss.com/bootstrap/4.0.0-beta.3/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+    <footer id="footer" class="py-3 bg-light">
+        <div class="container">
+            <p class="text-left small">
+                <span>&copy; WPArts 2018</span>
+                &nbsp;
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <a href="mailto:phylame@163.com">Contact</a>
+                &nbsp;
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <a href="https://github.com/phylame">GitHub</a>
+            </p>
+        </div>
+    </footer>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.0.0-beta.3/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

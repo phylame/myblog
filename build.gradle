@@ -1,11 +1,12 @@
 buildscript {
     ext {
-        kotlinVersion = '1.2.10'
+        kotlinVersion = '1.2.20'
         springBootVersion = '1.5.9.RELEASE'
         hibernateHikaricpVersion = '5.2.12.Final'
     }
 
     repositories {
+        jcenter()
         mavenCentral()
     }
 
@@ -33,6 +34,7 @@ compileTestKotlin {
 }
 
 repositories {
+    jcenter()
     mavenCentral()
 }
 
@@ -43,19 +45,20 @@ dependencies {
     runtime('org.springframework.boot:spring-boot-devtools')
 
     runtime('org.mariadb.jdbc:mariadb-java-client')
-
-    compile('org.hibernate:hibernate-ehcache')
+    compile("org.hibernate:hibernate-core:$hibernateHikaricpVersion")
+    compile("org.hibernate:hibernate-ehcache:$hibernateHikaricpVersion")
     compile("org.hibernate:hibernate-hikaricp:$hibernateHikaricpVersion")
 
     compile('org.springframework.boot:spring-boot-starter-data-jpa') {
+        exclude group: 'org.hibernate'
         exclude module: 'tomcat-jdbc'
     }
     compile('org.springframework.boot:spring-boot-starter-data-rest') {
         exclude module: 'spring-boot-starter-web'
     }
 
-    compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
     compile('org.springframework.boot:spring-boot-starter-undertow')
+    compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
     compile('org.springframework.boot:spring-boot-starter-thymeleaf') {
         exclude module: 'spring-boot-starter-tomcat'
     }

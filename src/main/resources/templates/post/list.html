@@ -55,42 +55,42 @@
                 <a href="view.html" th:href="@{/post/{postId}(postId=*{id})}" title="This is post title"
                    th:title="*{title}" th:text="*{title}">This is post title</a>
               </h5>
+              <p class="card-text" title="Post intro" th:text="*{intro}">Vivamus sagittis lacus vel augue laoreet rutrum
+                faucibus dolor
+                auctor. Duis mollis, est non
+                commodo luctus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere
+                erat a ante.orem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat
+                a ante.</p>
+              <div class="small text-muted">
+                <a class="text-white post-category" href="list.html" th:href="@{/post(category=*{category.id})}"
+                   th:text="*{category.name}">misc</a>
+                <span title="Post date">
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+            <span th:text="*{createTime.toLocalDate()}">2018-01-10</span>
+          </span>
+                <span title="Viewed number">
+            <i class="fa fa-book" aria-hidden="true"></i>
+            <span th:text="*{viewCount}">10</span>
+          </span>
+                <span title="Comments number">
+            <i class="fa fa-commenting" aria-hidden="true"></i>
+            <span th:text="*{voteCount}">7</span>
+          </span>
+              </div>
+            </div>
+          </li>
+          <li class="border-bottom">
+            <div class="card-body">
+              <h5 class="card-title">
+                <a href="view.html" title="This is post title">This is post title</a>
+              </h5>
               <p class="card-text" title="Post intro">Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor
                 auctor. Duis mollis, est non
                 commodo luctus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere
                 erat a ante.orem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat
                 a ante.</p>
               <ul class="list-inline small text-muted">
-                <li class="list-inline-item badge badge-light post-mark-item" title="Post category">
-                  <a href="list.html" th:href="@{/post(category=*{category.id})}" th:text="*{category.name}">misc</a>
-                </li>
-                <li class="list-inline-item" title="Post date">
-                  <i class="fa fa-calendar" aria-hidden="true"></i>
-                  <span th:text="*{creation.toLocalDate()}">2018-01-10</span>
-                </li>
-                <li class="list-inline-item" title="Viewed number">
-                  <i class="fa fa-book" aria-hidden="true"></i>
-                  <span th:text="*{readCount}">10</span>
-                </li>
-                <li class="list-inline-item" title="Comments number">
-                  <i class="fa fa-commenting" aria-hidden="true"></i>
-                  <span th:text="*{starCount}">7</span>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li class="border-bottom">
-            <div class="card-body">
-              <h5 class="card-title">
-                <a href="view.html" title="This is post title">This is post title</a>
-              </h5>
-              <p class="card-text" title="Post intro">Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor
-                auctor. Duis mollis, est non
-                commodo luctus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere
-                erat a ante.orem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat
-                a ante.</p>
-              <ul class="list-inline small text-muted">
-                <li class="list-inline-item badge badge-light post-mark-item" title="Post category">
+                <li class="list-inline-item post-category" title="Post category">
                   <a href="list.html">misc</a>
                 </li>
                 <li class="list-inline-item" title="Post date">
@@ -118,7 +118,7 @@
                 commodo luctus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere
                 erat a ante. </p>
               <ul class="list-inline small text-muted">
-                <li class="list-inline-item badge badge-light post-mark-item" title="Post category">
+                <li class="list-inline-item post-category" title="Post category">
                   <a href="list.html">misc</a>
                 </li>
                 <li class="list-inline-item" title="Post date">
@@ -146,7 +146,7 @@
                 commodo luctus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere
                 erat a ante. </p>
               <ul class="list-inline small text-muted">
-                <li class="list-inline-item badge badge-light post-mark-item" title="Post category">
+                <li class="list-inline-item badge post-category" title="Post category">
                   <a href="list.html">misc</a>
                 </li>
                 <li class="list-inline-item" title="Post date">
@@ -174,7 +174,7 @@
                 commodo luctus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere
                 erat a ante. </p>
               <ul class="list-inline small text-muted">
-                <li class="list-inline-item badge badge-light post-mark-item" title="Post category">
+                <li class="list-inline-item post-category" title="Post category">
                   <a href="list.html">misc</a>
                 </li>
                 <li class="list-inline-item" title="Post date">

@@ -45,43 +45,42 @@
   <main role="main" class="container">
     <div class="row">
       <article class="col-md-9">
-        <h1 class="mt-4" th:text="*{title}">Post Title</h1>
+        <h2 class="mt-3" th:text="*{title}">Post Title</h2>
         <div class="small text-muted clearfix">
-          <ul class="list-inline my-0 float-left">
-            <li class="list-inline-item badge badge-primary post-mark-item" title="Post category">
-              <a class="text-white" href="list.html" th:href="@{/post(category=*{category.id})}"
-                 th:text="*{category.name}">misc</a>
-            </li>
-            <li class="list-inline-item" title="Post date">
-              <i class="fa fa-calendar" aria-hidden="true"></i>
-              <span th:text="*{creation.toLocalDate()}">2018-01-10</span>
-            </li>
-            <li class="list-inline-item">
-              <i class="fa fa-tags" aria-hidden="true"></i>
-              <ul class="list-inline post-tag-list" style="display:inline" th:remove="all-but-first">
-                <li class="list-inline-item badge badge-secondary post-mark-item" th:each="tag: *{tags}">
-                  <a class="text-white" href="list.html" th:href="@{/post(tag=${tag.id})}"
-                     th:text="${tag.name}">misc</a>
-                </li>
-                <li class="list-inline-item badge badge-secondary post-mark-item">
-                  <a class="text-white" href="list.html">misc</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
+          <a class="text-white post-category" href="list.html" th:href="@{/post(category=*{category.id})}"
+             th:text="*{category.name}">misc</a>
+          <span>
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+            <span th:text="*{createTime.toLocalDate()}">2018-01-10</span>
+          </span>
+          <div class="d-inline-block">
+            <i class="fa fa-tags" aria-hidden="true"></i>
+            <ul class="list-inline post-tag-list" style="display:inline" th:remove="all-but-first">
+              <li class="list-inline-item mx-0" th:each="tag: *{tags}">
+                <a class="text-white post-tag" href="list.html"
+                   th:href="@{/post(tag=${tag.id})}"
+                   th:text="${tag.name}">misc</a>
+              </li>
+              <li class="list-inline-item post-tag">
+                <a class="text-white" href="list.html">misc</a>
+              </li>
+            </ul>
+          </div>
           <ul class="list-inline my-0 float-right">
             <li class="list-inline-item" title="Viewed number">
               <i class="fa fa-book" aria-hidden="true"></i>
-              <span th:text="*{readCount}">10</span>
+              <span th:text="*{viewCount}">10</span>
             </li>
             <li class="list-inline-item" title="Comments number">
               <i class="fa fa-commenting" aria-hidden="true"></i>
-              <span th:text="*{starCount}">7</span>
+              <span th:text="*{voteCount}">7</span>
             </li>
           </ul>
         </div>
-        <hr/>
-        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error
+        <hr class="mt-1"/>
+        <p class="post-intro" th:text="*{intro}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus,
+          vero,
+          obcaecati, aut, error
           quam sapiente
           nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus
           inventore?

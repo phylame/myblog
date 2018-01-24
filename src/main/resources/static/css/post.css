@@ -1,15 +1,30 @@
-.post-category, .post-tag {
+.post-item {
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: .8rem;
+}
+
+.post-item:first-child {
+    padding-top: 0;
+}
+
+.post-item h5 {
+    margin-bottom: .5rem;
+}
+
+.post-item p {
+    margin-bottom: .5rem;
+}
+
+.post-info-unit:not(:last-child) {
+    margin-right: .5rem;
+}
+
+.post-tag {
     padding: 0.1rem 0.3rem;
     border-radius: 0.2rem;
     min-width: 1.2rem;
     font-size: 0.9em;
-}
-
-.post-category {
-    background-color: black;
-}
-
-.post-tag {
     background-color: silver;
 }
 

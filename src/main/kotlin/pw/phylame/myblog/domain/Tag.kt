@@ -1,7 +1,7 @@
 package pw.phylame.myblog.domain
 
 import org.hibernate.validator.constraints.NotEmpty
-import org.springframework.data.repository.PagingAndSortingRepository
+import org.springframework.data.jpa.repository.JpaRepository
 import java.io.Serializable
 import java.time.LocalDateTime
 import javax.persistence.Column
@@ -25,6 +25,6 @@ class Tag : Serializable {
     var rank: Int = 0
 }
 
-interface TagRepository : PagingAndSortingRepository<Tag, Int> {
+interface TagRepository : JpaRepository<Tag, Int> {
     fun findOneByName(name: String): Tag?
 }

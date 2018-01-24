@@ -1,72 +1,69 @@
-<!DOCTYPE html>
+<!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="common_header(title,links)">
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no"/>
-  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"/>
-  <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-  <link rel="icon" href="../static/favicon.ico" th:href="@{/favicon.ico}"/>
-
+<head th:fragment="html_head(title,links)">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <link rel="icon" href="../image/favicon.ico" th:href="@{/favicon.ico}">
+  <meta name="author" content="input.fun">
   <title th:replace="${title}">The awesome application</title>
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../css/main.css" th:href="@{/css/main.css}">
 
-  <!--/* Per-page placeholder for additional links */-->
   <th:block th:replace="${links}"/>
 </head>
 <body>
-<div id="wrapper">
-  <header id="header">
-    <nav class="navbar navbar-expand-md navbar-light fixed-top py-0" th:fragment="navbar">
-      <div class="container">
-        <a class="navbar-brand" href="../index.html" th:href="@{/}">WPArts</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
-                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-          <i class="fa fa-bars" aria-hidden="true"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarContent">
-          <ul class="navbar-nav ml-auto" th:remove="all-but-first">
-            <li class="nav-item" th:each="nav: ${navItems}" th:classappend="${nav == activeNav} ? 'active'">
-              <a class="nav-link" href="../index.html" th:href="@{/{navId}(navId=${nav == 'home' ? '' : nav})}">
-                <span th:text="#{|page.nav.${nav}|}">Home</span>
-                <span class="sr-only" th:if="${nav == activeNav}">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="../app.html">Apps</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Articles
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="../about.html">About</a>
-            </li>
-          </ul>
-        </div>
+<header th:fragment="page_header">
+  <nav class="navbar navbar-expand-md fixed-top navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#" th:href="@{/}">WPArts</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+              aria-controls="navbarCollapse"
+              aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto" th:remove="all-but-first">
+          <li class="nav-item" th:each="nav: ${navItems}" th:classappend="${nav == activeNav} ? 'active'">
+            <a class="nav-link" href="../index.html" th:href="@{/{navId}(navId=${nav == 'home' ? '' : nav})}">
+              <span th:text="#{|page.nav.${nav}|}">Home</span>
+              <span class="sr-only" th:if="${nav == activeNav}">(current)</span>
+            </a>
+          </li>
+        </ul>
       </div>
-    </nav>
-  </header>
-  <main role="main" class="container">
-    <div class="row">
-
     </div>
-  </main>
-</div>
-<footer id="footer" class="py-3 bg-light">
+  </nav>
   <div class="container">
-    <p class="text-left small">
-      &copy; WPArts <span th:text="${#dates.year(#dates.createNow())}">2018</span>
-      &nbsp;
-      <i class="fa fa-envelope" aria-hidden="true"></i>
-      <a href="mailto:phylame@163.com">Contact</a>
-      &nbsp;
-      <i class="fa fa-github" aria-hidden="true"></i>
-      <a href="https://github.com/phylame">GitHub</a>
-    </p>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <i class="fa fa-home text-muted" aria-hidden="true"></i>
+          <a href="#" th:href="@{/}">Home</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="list.html">Articles</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Post title</li>
+      </ol>
+    </nav>
+  </div>
+</header>
+<footer class="footer" th:fragment="page_footer">
+  <div class="container">
+    <span>&copy; WPArts 2018</span>
+    &nbsp;
+    <i class="fa fa-envelope" aria-hidden="true"></i>
+    <a href="#" th:href="@{/concat}">Contact</a>
+    &nbsp;
+    <i class="fa fa-github" aria-hidden="true"></i>
+    <a href="https://github.com/phylame">GitHub</a>
   </div>
 </footer>
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js"></script>
-<script src="https://cdn.bootcss.com/bootstrap/4.0.0-beta.3/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+<script src="https://cdn.bootcss.com/axios/0.17.1/axios.min.js"></script>
 </body>
 </html>

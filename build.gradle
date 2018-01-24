@@ -1,8 +1,9 @@
 buildscript {
     ext {
-        kotlinVersion = '1.2.20'
+        kotlinVersion = '1.2.21'
         springBootVersion = '1.5.9.RELEASE'
         hibernateHikaricpVersion = '5.2.12.Final'
+        thymeleafVersion = '3.0.9.RELEASE'
     }
 
     repositories {
@@ -39,7 +40,7 @@ repositories {
 }
 
 dependencies {
-    compile("org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}")
+    compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
     compile("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
 
     runtime('org.springframework.boot:spring-boot-devtools')
@@ -62,4 +63,8 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-thymeleaf') {
         exclude module: 'spring-boot-starter-tomcat'
     }
+
+    compile('nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:2.2.2')
+    compile("org.thymeleaf:thymeleaf-spring4:$thymeleafVersion")
+    compile("org.thymeleaf:thymeleaf:$thymeleafVersion")
 }

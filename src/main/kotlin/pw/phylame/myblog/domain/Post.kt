@@ -3,9 +3,10 @@ package pw.phylame.myblog.domain
 import org.hibernate.validator.constraints.NotEmpty
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
-import org.springframework.data.repository.PagingAndSortingRepository
+import org.springframework.data.jpa.repository.JpaRepository
 import java.time.LocalDateTime
 import javax.persistence.*
+import javax.validation.constraints.NotNull
 
 @Entity
 class Post {
@@ -37,13 +38,25 @@ class Post {
 
     var rank: Int = 0
 
-    var viewCount: Int = 0
-
-    var voteCount: Int = 0
+    @get:[NotNull OneToOne(mappedBy = "post")]
+    var stat: PostStat = PostStat()
 }
 
-interface PostRepository : PagingAndSortingRepository<Post, Int> {
+interface PostRepository : JpaRepository<Post, Int> {
     fun findAllByCategoryId(category: Int, pageable: Pageable?): Page<Post>
 
     fun findAllByTagsId(tag: Int, pageable: Pageable?): Page<Post>
+}
+
+@Entity
+class PostStat {
+    @get:[Id GeneratedValue]
+    var id: Int = 0
+
+    @get:[OneToOne JoinColumn(name = "post_id")]
+    lateinit var post: Post
+
+    var viewCount: Int = 0
+
+    var voteCount: Int = 0
 }

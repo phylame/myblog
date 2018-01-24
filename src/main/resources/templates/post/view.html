@@ -1,292 +1,215 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" th:object="${post}">
-<head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"/>
-  <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-  <link rel="stylesheet" href="../../static/css/main.css" th:href="@{/css/main.css}"/>
+<head th:replace="page :: html_head(~{::title},~{::link})">
+  <title th:text="${post.title}">Post title</title>
   <link rel="stylesheet" href="../../static/css/post.css" th:href="@{/css/post.css}"/>
-  <link rel="icon" href="../../static/favicon.ico" th:href="@{/favicon.ico}"/>
-  <title th:text="*{title}">Post Title</title>
 </head>
 <body>
-<div id="wrapper">
-  <header id="header">
-    <nav class="navbar navbar-expand-md navbar-light fixed-top py-0" th:replace="page :: navbar">
-      <div class="container">
-        <a class="navbar-brand" href="../index.html">WPArts</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
-                aria-controls="navbarContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-          <i class="fa fa-bars" aria-hidden="true"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarContent">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="../index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="../app.html">Apps</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Articles
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="../about.html">About</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
-  <main role="main" class="container">
-    <div class="row">
-      <article class="col-md-9">
-        <h2 class="mt-3" th:text="*{title}">Post Title</h2>
-        <div class="small text-muted clearfix">
-          <a class="text-white post-category" href="list.html" th:href="@{/post(category=*{category.id})}"
-             th:text="*{category.name}">misc</a>
-          <span>
+<header th:replace="page :: page_header"></header>
+<main role="main" class="container">
+  <div class="row">
+    <article class="col-lg-8" th:object="${post}">
+      <h2 th:text="*{title}">Post Title</h2>
+      <div class="small text-muted clearfix">
+        <span class="post-info-unit" title="View posts for category">
+            <i class="fa fa-folder" aria-hidden="true"></i>
+          <a href="list.html" th:href="@{/post(category=*{category.id})}" th:text="*{category.name}">Category</a>
+        </span>
+        <span class="post-info-unit" title="Publication date">
             <i class="fa fa-calendar" aria-hidden="true"></i>
             <span th:text="*{createTime.toLocalDate()}">2018-01-10</span>
-          </span>
-          <div class="d-inline-block">
-            <i class="fa fa-tags" aria-hidden="true"></i>
-            <ul class="list-inline post-tag-list" style="display:inline" th:remove="all-but-first">
-              <li class="list-inline-item mx-0" th:each="tag: *{tags}">
-                <a class="text-white post-tag" href="list.html"
-                   th:href="@{/post(tag=${tag.id})}"
-                   th:text="${tag.name}">misc</a>
-              </li>
-              <li class="list-inline-item post-tag">
-                <a class="text-white" href="list.html">misc</a>
-              </li>
-            </ul>
-          </div>
-          <ul class="list-inline my-0 float-right">
-            <li class="list-inline-item" title="Viewed number">
-              <i class="fa fa-book" aria-hidden="true"></i>
-              <span th:text="*{viewCount}">10</span>
+        </span>
+        <div class="d-inline-block">
+          <i class="fa fa-tags" aria-hidden="true"></i>
+          <ul class="list-inline post-tag-list" style="display:inline" th:remove="all-but-first">
+            <li class="list-inline-item mx-0" th:each="tag: *{tags}">
+              <a class="text-white post-tag" href="list.html" th:href="@{/post(tag=${tag.id})}" th:text="${tag.name}">misc</a>
             </li>
-            <li class="list-inline-item" title="Comments number">
-              <i class="fa fa-commenting" aria-hidden="true"></i>
-              <span th:text="*{voteCount}">7</span>
+            <li class="list-inline-item post-tag">
+              <a class="text-white" href="list.html">misc</a>
             </li>
           </ul>
         </div>
-        <hr class="mt-1"/>
-        <p class="post-intro" th:text="*{intro}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus,
-          vero,
-          obcaecati, aut, error
-          quam sapiente
-          nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus
-          inventore?
-        </p>
+        <ul class="list-inline my-0 float-right">
+          <li class="list-inline-item post-info-unit" title="Viewed number">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+            <span th:text="*{stat.viewCount}">5</span>
+          </li>
+          <li class="list-inline-item post-info-unit" title="Comments number">
+            <i class="fa fa-commenting" aria-hidden="true"></i>
+            <span th:text="*{stat.voteCount}">4</span>
+          </li>
+        </ul>
+      </div>
+      <hr class="mt-1"/>
+      <p class="post-intro" th:text="*{intro}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero,
+        obcaecati, aut, error quam sapiente
+        nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?
+      </p>
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste
-          ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus,
-          voluptatibus.
-        </p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste
+        ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.
+      </p>
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, doloribus, dolorem iusto blanditiis unde
-          eius illum consequuntur neque dicta incidunt ullam ea hic porro optio ratione repellat perspiciatis.
-          Enim, iure!</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, doloribus, dolorem iusto blanditiis unde eius
+        illum consequuntur neque dicta incidunt ullam ea hic porro optio ratione repellat perspiciatis. Enim,
+        iure!
+      </p>
 
-        <blockquote class="blockquote">
-          <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-          <footer class="blockquote-footer">Someone famous in
-            <cite title="Source Title">Source Title</cite>
-          </footer>
-        </blockquote>
+      <blockquote class="blockquote">
+        <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+        <footer class="blockquote-footer">Someone famous in
+          <cite title="Source Title">Source Title</cite>
+        </footer>
+      </blockquote>
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nostrum, aliquid, animi, ut quas placeat
-          totam sunt tempora commodi nihil ullam alias modi dicta saepe minima ab quo voluptatem obcaecati?</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nostrum, aliquid, animi, ut quas placeat
+        totam sunt tempora commodi nihil ullam alias modi dicta saepe minima ab quo voluptatem obcaecati?</p>
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam
-          tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae?
-          Qui, necessitatibus, est!
-        </p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam
+        tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae?
+        Qui, necessitatibus, est!
+      </p>
 
-        <div class="card my-4">
-          <h5 class="card-header">Leave a Comment:</h5>
-          <div class="card-body">
-            <form>
-              <div class="collapse" id="userInfo">
-                <div class="form-group">
-                  <label for="userman">Name</label>
-                  <input type="text" class="form-control" id="userman" placeholder="Your name"/>
-                </div>
-                <div class="form-group">
-                  <label for="email">Email address</label>
-                  <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
-                         placeholder="Enter email"/>
-                  <small id="emailHelp" class="form-text text-muted">I'll never share your email with anyone else.
-                  </small>
-                </div>
+      <div class="card my-4">
+        <h5 class="card-header">Leave a Comment:</h5>
+        <div class="card-body">
+          <form id="comment">
+            <div class="collapse" id="userInfo">
+              <div class="form-group">
+                <label for="userman">Name</label>
+                <input type="text" class="form-control" id="userman" placeholder="Your name"/>
               </div>
               <div class="form-group">
-                <textarea class="form-control" rows="3" placeholder="Enter your comment"></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
-              <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#userInfo"
-                      aria-expanded="false" aria-controls="userInfo">
-                More...
-              </button>
-            </form>
-          </div>
-        </div>
-
-        <!-- Single Comment -->
-        <div class="media mb-4" th:each="comm: *{comments}">
-          <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt=""/>
-          <div class="media-body">
-            <h5 class="mt-0" th:text="${comm.name}">Commenter Name</h5>
-            <span th:text="${comm.content}">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio,
-            vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec
-            lacinia congue felis in faucibus.</span>
-          </div>
-        </div>
-
-        <!-- Comment with nested comments -->
-        <div class="media mb-4">
-          <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt=""/>
-          <div class="media-body">
-            <h5 class="mt-0">Commenter Name</h5>
-            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio,
-            vestibulum in
-            vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec
-            lacinia congue felis in faucibus.
-
-            <div class="media mt-4">
-              <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt=""/>
-              <div class="media-body">
-                <h5 class="mt-0">Commenter Name</h5>
-                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus
-                odio, vestibulum in
-                vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla.
-                Donec lacinia congue felis in faucibus.
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+                       placeholder="Enter email"/>
+                <small id="emailHelp" class="form-text text-muted">I'll never share your email with anyone else.
+                </small>
               </div>
             </div>
-
-            <div class="media mt-4">
-              <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt=""/>
-              <div class="media-body">
-                <h5 class="mt-0">Commenter Name</h5>
-                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus
-                odio, vestibulum in
-                vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla.
-                Donec lacinia congue felis in faucibus.
-              </div>
+            <div class="form-group">
+              <textarea class="form-control" rows="3" placeholder="Enter your comment"></textarea>
             </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#userInfo"
+                    aria-expanded="false" aria-controls="userInfo">
+              More...
+            </button>
+          </form>
+        </div>
+      </div>
 
+      <!-- Single Comment -->
+      <div class="media mb-4" th:each="comm: *{comments}" th:if="${comm.origin == null}">
+        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt=""/>
+        <div class="media-body">
+          <h5 class="mt-0" th:text="${comm.name ?: '[Anonymous]'}">Commenter Name</h5>
+          <span th:text="${comm.content}">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras
+                            purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
+                            vulputate fringilla. Donec lacinia congue felis in faucibus.</span>
+
+          <div class="media mt-4" th:each="rep: ${comm.replies}">
+            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt=""/>
+            <div class="media-body">
+              <h5 class="mt-0" th:text="${rep.name ?: '[Anonymous]'}">Commenter Name</h5>
+              <span th:text="${rep.content}">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras
+                            purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
+                            vulputate fringilla. Donec lacinia congue felis in faucibus.</span>
+            </div>
           </div>
         </div>
-      </article>
-      <aside class="col-md-3">
-        <form class="pt-3">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for posts"/>
-            <span class="input-group-btn">
+      </div>
+    </article>
+    <aside class="col-lg-4">
+      <form class="pt-3">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search for posts"/>
+          <span class="input-group-btn">
               <button class="btn btn-secondary no-rounded-left" type="button">
                 <i class="fa fa-search" aria-hidden="true"></i>
               </button>
             </span>
-          </div>
-        </form>
-        <div class="card my-4">
-          <div class="card-body">
-            <h5 class="card-title">Categories</h5>
-            <ul class="list-unstyled">
-              <li>
-                <a class="clearfix" href="list.html">
-                  <span class="float-left">Java</span>
-                  <span class="badge badge-primary badge-pill float-right">6</span>
-                </a>
-              </li>
-              <li>
-                <a class="clearfix" href="list.html">
-                  <span class="float-left">Nginx</span>
-                  <span class="badge badge-primary badge-pill float-right">16</span>
-                </a>
-              </li>
-              <div class="collapse" id="hiddenCategories">
-                <li>
-                  <a class="clearfix" href="list.html">
-                    <span class="float-left">Linux</span>
-                    <span class="badge badge-primary badge-pill float-right">2</span>
-                  </a>
-                </li>
-                <li>
-                  <a class="clearfix" href="list.html">
-                    <span class="float-left">Misc</span>
-                    <span class="badge badge-primary badge-pill float-right">4</span>
-                  </a>
-                </li>
-              </div>
-            </ul>
-            <a data-toggle="collapse" href="#hiddenCategories" role="button" aria-expanded="false"
-               aria-controls="hiddenCategories">
-              More...
-            </a>
-          </div>
         </div>
-        <div class="card my-4">
-          <div class="card-body">
-            <h5 class="card-title">Archives</h5>
-            <ul class="list-unstyled">
+      </form>
+      <div class="card my-4">
+        <div class="card-body">
+          <h5 class="card-title">Categories</h5>
+          <ul class="list-unstyled">
+            <li>
+              <a class="clearfix" href="list.html">
+                <span class="float-left">Java</span>
+                <span class="badge badge-primary badge-pill float-right">6</span>
+              </a>
+            </li>
+            <li>
+              <a class="clearfix" href="list.html">
+                <span class="float-left">Nginx</span>
+                <span class="badge badge-primary badge-pill float-right">16</span>
+              </a>
+            </li>
+            <div class="collapse" id="hiddenCategories">
               <li>
                 <a class="clearfix" href="list.html">
-                  <span class="float-left">Jan, 2018</span>
-                  <span class="badge badge-primary badge-pill float-right">6</span>
+                  <span class="float-left">Linux</span>
+                  <span class="badge badge-primary badge-pill float-right">2</span>
                 </a>
               </li>
               <li>
                 <a class="clearfix" href="list.html">
-                  <span class="float-left">Aug, 2017</span>
-                  <span class="badge badge-primary badge-pill float-right">16</span>
+                  <span class="float-left">Misc</span>
+                  <span class="badge badge-primary badge-pill float-right">4</span>
                 </a>
               </li>
-              <div class="collapse" id="hiddenArchives">
-                <li>
-                  <a class="clearfix" href="list.html">
-                    <span class="float-left">May, 2017</span>
-                    <span class="badge badge-primary badge-pill float-right">2</span>
-                  </a>
-                </li>
-                <li>
-                  <a class="clearfix" href="list.html">
-                    <span class="float-left">Apr, 2017</span>
-                    <span class="badge badge-primary badge-pill float-right">4</span>
-                  </a>
-                </li>
-              </div>
-            </ul>
-            <a data-toggle="collapse" href="#hiddenArchives" role="button" aria-expanded="false"
-               aria-controls="hiddenArchives">
-              More...
-            </a>
-          </div>
+            </div>
+          </ul>
+          <a data-toggle="collapse" href="#hiddenCategories" role="button" aria-expanded="false"
+             aria-controls="hiddenCategories">
+            More...
+          </a>
         </div>
-      </aside>
-    </div>
-  </main>
-</div>
-<footer id="footer" class="py-3 bg-light" th:replace="page :: footer">
-  <div class="container">
-    <p class="text-left small">
-      <span>&copy; WPArts 2018</span>
-      &nbsp;
-      <i class="fa fa-envelope" aria-hidden="true"></i>
-      <a href="mailto:phylame@163.com">Contact</a>
-      &nbsp;
-      <i class="fa fa-github" aria-hidden="true"></i>
-      <a href="https://github.com/phylame">GitHub</a>
-    </p>
+      </div>
+      <div class="card my-4">
+        <div class="card-body">
+          <h5 class="card-title">Archives</h5>
+          <ul class="list-unstyled">
+            <li>
+              <a class="clearfix" href="list.html">
+                <span class="float-left">Jan, 2018</span>
+                <span class="badge badge-primary badge-pill float-right">6</span>
+              </a>
+            </li>
+            <li>
+              <a class="clearfix" href="list.html">
+                <span class="float-left">Aug, 2017</span>
+                <span class="badge badge-primary badge-pill float-right">16</span>
+              </a>
+            </li>
+            <div class="collapse" id="hiddenArchives">
+              <li>
+                <a class="clearfix" href="list.html">
+                  <span class="float-left">May, 2017</span>
+                  <span class="badge badge-primary badge-pill float-right">2</span>
+                </a>
+              </li>
+              <li>
+                <a class="clearfix" href="list.html">
+                  <span class="float-left">Apr, 2017</span>
+                  <span class="badge badge-primary badge-pill float-right">4</span>
+                </a>
+              </li>
+            </div>
+          </ul>
+          <a data-toggle="collapse" href="#hiddenArchives" role="button" aria-expanded="false"
+             aria-controls="hiddenArchives">
+            More...
+          </a>
+        </div>
+      </div>
+    </aside>
   </div>
-</footer>
+</main>
+<footer th:replace="page :: page_footer"></footer>
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/4.0.0-beta.3/js/bootstrap.bundle.min.js"></script>
 </body>

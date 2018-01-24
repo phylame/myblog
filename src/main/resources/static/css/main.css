@@ -1,35 +1,66 @@
-html, body {
-    margin: 0;
-    height: 100%;
+html {
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-    padding-top: 3rem;
+    margin-top: 3rem;
+    /* Margin bottom by footer height */
+    margin-bottom: 3rem;
+    color: #444;
+    background-image: url(../image/texture.png);
 }
 
-#wrapper {
-    min-height: 100%;
-    height: auto !important;
-    height: 100%;
+body>header>.navbar {
+    padding-top: 0;
+    padding-bottom: 0;
+    color: #444;
+    background-color: #282828;
+    box-shadow: 0 4px 4px #e1e4e8;
+    background-image: url(../image/board.gif);
 }
 
-#header>.navbar {
-    background: linear-gradient(to bottom, #ffffff, #f2f2f2) repeat-x;
-    border-bottom: 1px solid #d4d4d4;
-    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+.breadcrumb {
+    padding-left: 0;
+    margin-bottom: .5rem;
+    background-color: transparent;
 }
 
-main {
-    padding-bottom: 48px;
+.right-pane>*:not(:last-child) {
+    margin-bottom: 1rem;
 }
 
-#footer {
-    position: relative;
-    margin-top: -48px;
-    height: 48px;
-    clear: both;
-    color: #999;
-    background-color: #f9f9f9;
+.right-pane .card .card-header {
+    padding: .5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.right-pane .card .card-footer {
+    border: none;
+    padding: .5rem;
+    font-size: .9rem;
+}
+
+.right-pane .card .list-group-item {
+    padding: .5rem .6rem;
+}
+
+.right-pane .card .list-group-item a {
+    font-size: .8rem;
+    font-weight: 600;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 2.5rem;
+    line-height: 2.5rem;
+    color: silver;
+    background-color: #282828;
+    background-image: url(../image/board.gif);
 }
 
 .no-rounded-left {
@@ -44,4 +75,8 @@ main {
 
 .border-bottom {
     border-bottom: 1px #e1e4e8 solid !important;
+}
+
+[v-cloak] {
+    display: none;
 }

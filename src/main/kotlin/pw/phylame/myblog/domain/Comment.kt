@@ -3,7 +3,7 @@ package pw.phylame.myblog.domain
 import org.hibernate.validator.constraints.NotEmpty
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
-import org.springframework.data.repository.PagingAndSortingRepository
+import org.springframework.data.jpa.repository.JpaRepository
 import java.io.Serializable
 import java.time.LocalDateTime
 import javax.persistence.*
@@ -35,6 +35,8 @@ class Comment : Serializable {
     lateinit var content: String
 }
 
-interface CommentRepository : PagingAndSortingRepository<Comment, Int> {
+interface CommentRepository : JpaRepository<Comment, Int> {
     fun findAllByPostId(articleId: Int, pageable: Pageable?): Page<Comment>
+
+    fun findAllByOriginId(originId: Int, pageable: Pageable?): Page<Column>
 }

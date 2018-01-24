@@ -3,7 +3,7 @@ package pw.phylame.myblog.domain
 import org.hibernate.validator.constraints.NotEmpty
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
-import org.springframework.data.repository.PagingAndSortingRepository
+import org.springframework.data.jpa.repository.JpaRepository
 import java.io.Serializable
 import java.time.LocalDateTime
 import javax.persistence.*
@@ -30,7 +30,7 @@ class Category : Serializable {
     var rank: Int = 0
 }
 
-interface CategoryRepository : PagingAndSortingRepository<Category, Int> {
+interface CategoryRepository : JpaRepository<Category, Int> {
     fun findOneByName(name: String): Category?
 
     fun findAllByParentId(parentId: Int, pageable: Pageable?): Page<Category>
